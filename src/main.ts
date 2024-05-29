@@ -1,4 +1,3 @@
-import { message } from "./utils/message";
 import { triggerAudio } from "./utils/playAudio";
 import {
   getTotalTimeObject,
@@ -181,4 +180,3 @@ document.addEventListener("DOMContentLoaded", () => {
   createResetButton(totalTimeInSeconds);
 });
 
-message();
