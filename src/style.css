@@ -1,11 +1,86 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: Helvetica, sans-serif;
-  background-color: #322c2c;
-  color: #fff;
+  background-color: #1b0e0e;
+  color: #979494;
+}
+
+.overlay {
+  border-image: fill 1
+    linear-gradient(hsl(240 100% 50% / 0.3), hsl(0 100% 50% / 0.3));
+}
+
+.wrapper {
+  position: relative;
+  background-image: url("./assets/images/concentrar-background.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 50px;
+  font-size: 36px;
+  color: white;
+  text-align: center;
+}
+
+.content {
+  background-color: rgba(0, 0, 0, 0.266);
+  padding: 100px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.content .timerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .timer {
+  text-align: center;
+  font-size: 66px;
+  color: white;
+}
+
+.content .totalTimeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.content .totalTimeText {
+  font-size: 24px;
+  color: white;
+}
+
+.content .totalTimeDisplay {
+  font-size: 24px;
+  color: white;
+}
+
+.totalTimeDisplay .totalTimeDisplayContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.hiddenBtn {
+  display: none;
 }

@@ -1,7 +1,7 @@
 import { resetTotalTime } from "../main";
 
-let $totalTimeContainer = document.getElementById(
-  "totalTimeContainer"
+let $totalTimeDisplayContainer = document.getElementById(
+  "totalTimeDisplayContainer"
 ) as HTMLDivElement;
 
 export const setTotalTimeLS = (minutes: number, seconds: number) => {
@@ -34,15 +34,18 @@ export const createResetButton = (totalTimeInSeconds: number) => {
   if (existingButton) return;
 
   if (totalTimeInSeconds !== 0) {
-    $totalTimeContainer.insertAdjacentHTML(
-      "afterend",
+    $totalTimeDisplayContainer.insertAdjacentHTML(
+      "beforeend",
       `
-      <button type='button' class='resetTotalTime' id='resetTotalTime'>
+      <button type='button' class='resetTotalTime btn btn-outline-danger btn-sm px-1 py-0' id='resetTotalTime'>
         X
       </button>
     `
     );
   }
   let resetButton = document.getElementById("resetTotalTime");
-  resetButton?.addEventListener("click", resetTotalTime);
+  resetButton?.addEventListener("click", () => {
+    resetTotalTime();
+    resetButton.remove();
+  });
 };

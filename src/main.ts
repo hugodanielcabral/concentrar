@@ -1,3 +1,4 @@
+import { message } from "./utils/message";
 import { triggerAudio } from "./utils/playAudio";
 import {
   getTotalTimeObject,
@@ -98,6 +99,8 @@ const startTotalTime = () => {
     if ($totalTime) {
       updateTotalTimeDisplay();
     }
+
+    createResetButton(totalTimeInSeconds);
   }, 1000);
 };
 
@@ -177,3 +180,5 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   createResetButton(totalTimeInSeconds);
 });
+
+message();
