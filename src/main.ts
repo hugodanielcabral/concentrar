@@ -1,4 +1,7 @@
-import { getTotalTimeObject, setTotalTimeLS } from "./utils/totalTime";
+import { triggerAudio } from "./utils/playAudio";
+import { getTotalTimeObject, setTotalTimeLS,addResetButtonTotalTime} from "./utils/totalTime";
+
+
 
 let $timer = document.getElementById("timer"),
   $startButton = document.getElementById("startButton") as HTMLButtonElement,
@@ -7,15 +10,18 @@ let $timer = document.getElementById("timer"),
   $resetButton = document.getElementById("resetButton") as HTMLButtonElement,
   $totalTime = document.getElementById("totalTime") as HTMLElement;
 
-let timeInMinutes = 25;
+let timeInMinutes = 1;
 let timeInSeconds = 0;
-let totalTimeInMinutes = 0;
-let totalTimeInSeconds = 0;
+ let totalTimeInMinutes = 0;
+ let totalTimeInSeconds = 0;
 
 let startIntervalId: number;
 let totalTimeIntervalId: number;
 
 const changeButtonVisibility = (btnValue: string) => {
+
+  
+  
   switch (btnValue) {
     case "start":
       $startButton?.classList.add("hiddenBtn");
@@ -44,6 +50,7 @@ const changeButtonVisibility = (btnValue: string) => {
 
 const startTimer = () => {
   startIntervalId = setInterval(() => {
+    
     if (timeInSeconds === 0) {
       timeInMinutes = timeInMinutes - 1;
       timeInSeconds = 59;
@@ -58,6 +65,8 @@ const startTimer = () => {
 
       document.title = $timer?.textContent;
     }
+
+    notifyAndResetTimer();
   }, 1000);
 };
 
@@ -67,7 +76,7 @@ const stopTimer = () => {
 
 const resetTimer = () => {
   clearInterval(startIntervalId);
-  timeInMinutes = 25;
+  timeInMinutes = 1;
   timeInSeconds = 0;
 
   if ($timer) {
@@ -98,11 +107,29 @@ const stopTotalTime = () => {
   clearInterval(totalTimeIntervalId);
 };
 
+const notifyAndResetTimer = () => {
+  if (timeInMinutes === 0 && timeInSeconds === 0){
+    triggerAudio();
+    changeButtonVisibility("reset")
+    resetTimer();
+    stopTotalTime();
+  }
+
+  return;
+}
+
 const updateTotalTimeDisplay = () => {
   $totalTime.textContent = `${totalTimeInMinutes
     .toString()
     .padStart(2, "0")}:${totalTimeInSeconds.toString().padStart(2, "0")}`;
 };
+
+export const resetTotalTime = () => {
+  totalTimeInMinutes = 0;
+  totalTimeInSeconds = 0;
+  setTotalTimeLS(totalTimeInMinutes, totalTimeInSeconds); 
+  updateTotalTimeDisplay();
+}
 
 $startButton?.addEventListener("click", (e: Event) => {
   const { value } = e.target as HTMLInputElement;
@@ -137,6 +164,7 @@ $resetButton?.addEventListener("click", (e: Event) => {
   stopTotalTime();
 });
 
+
 document.addEventListener("DOMContentLoaded", () => {
   let totalTimeObject = getTotalTimeObject(
     totalTimeInMinutes,
@@ -149,6 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTotalTimeDisplay();
 });
 
-// TODO 1: Agregar boton para reiniciar el total estudiado.
-// TODO 2: Agregar sonido para cuando llegue a 00:00. Si tengo algun problema de que suena cuando se carga la pagina, deberia crear una variable para evitar esto.
-// TODO 2: Agregar estilos usando CSS puro.
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  addResetButtonTotalTime(totalTimeInSeconds);
+});
+

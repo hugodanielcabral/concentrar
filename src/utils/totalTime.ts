@@ -1,3 +1,10 @@
+import { resetTotalTime } from "../main";
+
+
+let $totalTimeContainer = document.getElementById("totalTimeContainer") as HTMLDivElement;
+
+
+
 export const setTotalTimeLS = (minutes: number, seconds: number) => {
   localStorage.setItem(
     "lsTotalTime",
@@ -22,3 +29,19 @@ export const getTotalTimeObject = (
     return totalTimeObject;
   }
 };
+
+
+export const addResetButtonTotalTime = (totalTimeInSeconds:number) => {
+
+  let existingButton = document.getElementById("resetTotalTime");
+  if (existingButton) return;
+
+  if (totalTimeInSeconds !== 0){
+    $totalTimeContainer.insertAdjacentHTML("afterend", `
+      <button type='button' class='resetTotalTime' id='resetTotalTime'>X</button>
+    `)
+  }
+  let resetButton = document.getElementById("resetTotalTime");
+    resetButton?.addEventListener("click", resetTotalTime);
+}
+
