@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <div>
+        <h1 id="timer">25:00</h1>
+        <button id="startButton" value="start">Iniciar</button>
+        <button id="resumeButton" class="hiddenBtn" value="resume">
+          Reanudar
+        </button>
+        <button id="stopButton" class="hiddenBtn" value="stop">Detener</button>
+        <button id="resetButton" class="hiddenBtn" value="reset">
+          Reiniciar
+        </button>
+      </div>
+      <div>
+        <h2>Total estudiado:</h2>
+        <span id="totalTime">00:00</span>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
