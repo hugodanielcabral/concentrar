@@ -12,7 +12,7 @@ let $timer = document.getElementById("timer"),
   $resetButton = document.getElementById("resetButton") as HTMLButtonElement,
   $totalTime = document.getElementById("totalTime") as HTMLElement;
 
-let timeInMinutes = 1;
+let timeInMinutes = 25;
 let timeInSeconds = 0;
 let totalTimeInMinutes = 0;
 let totalTimeInSeconds = 0;
@@ -74,7 +74,7 @@ const stopTimer = () => {
 
 const resetTimer = () => {
   clearInterval(startIntervalId);
-  timeInMinutes = 1;
+  timeInMinutes = 25;
   timeInSeconds = 0;
 
   if ($timer) {
