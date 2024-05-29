@@ -1,7 +1,9 @@
 import { triggerAudio } from "./utils/playAudio";
-import { getTotalTimeObject, setTotalTimeLS,addResetButtonTotalTime} from "./utils/totalTime";
-
-
+import {
+  getTotalTimeObject,
+  setTotalTimeLS,
+  createResetButton,
+} from "./utils/totalTime";
 
 let $timer = document.getElementById("timer"),
   $startButton = document.getElementById("startButton") as HTMLButtonElement,
@@ -12,16 +14,13 @@ let $timer = document.getElementById("timer"),
 
 let timeInMinutes = 1;
 let timeInSeconds = 0;
- let totalTimeInMinutes = 0;
- let totalTimeInSeconds = 0;
+let totalTimeInMinutes = 0;
+let totalTimeInSeconds = 0;
 
 let startIntervalId: number;
 let totalTimeIntervalId: number;
 
 const changeButtonVisibility = (btnValue: string) => {
-
-  
-  
   switch (btnValue) {
     case "start":
       $startButton?.classList.add("hiddenBtn");
@@ -50,7 +49,6 @@ const changeButtonVisibility = (btnValue: string) => {
 
 const startTimer = () => {
   startIntervalId = setInterval(() => {
-    
     if (timeInSeconds === 0) {
       timeInMinutes = timeInMinutes - 1;
       timeInSeconds = 59;
@@ -108,15 +106,15 @@ const stopTotalTime = () => {
 };
 
 const notifyAndResetTimer = () => {
-  if (timeInMinutes === 0 && timeInSeconds === 0){
+  if (timeInMinutes === 0 && timeInSeconds === 0) {
     triggerAudio();
-    changeButtonVisibility("reset")
+    changeButtonVisibility("reset");
     resetTimer();
     stopTotalTime();
   }
 
   return;
-}
+};
 
 const updateTotalTimeDisplay = () => {
   $totalTime.textContent = `${totalTimeInMinutes
@@ -127,9 +125,9 @@ const updateTotalTimeDisplay = () => {
 export const resetTotalTime = () => {
   totalTimeInMinutes = 0;
   totalTimeInSeconds = 0;
-  setTotalTimeLS(totalTimeInMinutes, totalTimeInSeconds); 
+  setTotalTimeLS(totalTimeInMinutes, totalTimeInSeconds);
   updateTotalTimeDisplay();
-}
+};
 
 $startButton?.addEventListener("click", (e: Event) => {
   const { value } = e.target as HTMLInputElement;
@@ -164,7 +162,6 @@ $resetButton?.addEventListener("click", (e: Event) => {
   stopTotalTime();
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
   let totalTimeObject = getTotalTimeObject(
     totalTimeInMinutes,
@@ -177,10 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTotalTimeDisplay();
 });
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  addResetButtonTotalTime(totalTimeInSeconds);
+  createResetButton(totalTimeInSeconds);
 });
-
